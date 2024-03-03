@@ -61,7 +61,7 @@ func move(canMove, destVec3, worldPos, idCheck):
 		var oldVec3 = celVec3
 		celVec3 = destVec3
 #		position = (Vector2(celVec3.x,celVec3.y) * Globals.cellSize) + Vector2(8,8)
-		position = worldPos
+		position = worldPos + Vector2(16,16)
 		print("@: Origin:",oldVec3," Dest:",destVec3," Pos:", position)
 		moveAllows = 0
 	else:
@@ -71,4 +71,5 @@ func move(canMove, destVec3, worldPos, idCheck):
 
 func update_pos_from_map(pos, checkId):
 	if id == checkId:
-		position = pos
+		position = pos + Vector2(16,16)
+		print("Pos change: ", position)

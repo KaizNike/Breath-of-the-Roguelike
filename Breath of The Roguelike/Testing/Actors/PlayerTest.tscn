@@ -1,6 +1,9 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://Testing/Actors/PlayerTest.gd" type="Script" id=1]
+[ext_resource path="res://Assets/LightWhite.png" type="Texture" id=2]
+[ext_resource path="res://Assets/LightWhiteOutline.png" type="Texture" id=3]
+[ext_resource path="res://Assets/Light.png" type="Texture" id=4]
 
 [node name="PlayerTest" type="Node2D"]
 script = ExtResource( 1 )
@@ -12,5 +15,31 @@ one_shot = true
 
 [node name="Camera2D" type="Camera2D" parent="."]
 current = true
+
+[node name="Light2D" type="Light2D" parent="."]
+visible = false
+texture = ExtResource( 3 )
+texture_scale = 32.0
+mode = 3
+range_layer_max = 2
+range_item_cull_mask = 2
+shadow_item_cull_mask = 3
+
+[node name="WallHider" type="Light2D" parent="."]
+visible = false
+texture = ExtResource( 2 )
+texture_scale = 32.0
+energy = 0.8
+mode = 3
+range_layer_min = -1
+shadow_enabled = true
+shadow_gradient_length = 1.0
+shadow_filter = 1
+shadow_filter_smooth = 0.1
+
+[node name="Sprite" type="Sprite" parent="."]
+visible = false
+scale = Vector2( 32, 32 )
+texture = ExtResource( 4 )
 
 [connection signal="timeout" from="MoveActionHeldTimer" to="." method="_on_MoveActionHeldTimer_timeout"]
