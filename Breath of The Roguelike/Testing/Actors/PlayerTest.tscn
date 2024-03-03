@@ -4,3 +4,10 @@
 
 [node name="PlayerTest" type="Node"]
 script = ExtResource( 1 )
+
+[node name="MoveActionHeldTimer" type="Timer" parent="."]
+process_mode = 0
+wait_time = 0.5
+one_shot = true
+
+[connection signal="timeout" from="MoveActionHeldTimer" to="." method="_on_MoveActionHeldTimer_timeout"]

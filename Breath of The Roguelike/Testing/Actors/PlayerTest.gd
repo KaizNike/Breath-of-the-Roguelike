@@ -1,6 +1,7 @@
 extends Actor
 
 var blocked = false
+var movement_action_held = false
 # Declare member variables here. Examples:
 # var a = 2
 # var b = "text"
@@ -11,15 +12,55 @@ func _ready():
 	pass # Replace with function body.
 
 func _physics_process(delta):
-	var vec
+	if movement_action_held and not blocked:
+		handle_movement()
+	pass
+
+func _unhandled_input(event):
+	if (event.get_action_strength("move_rise") or event.get_action_strength("move_fall") or
+	event.get_action_strength("corner_move_backleft") or event.get_action_strength("corner_move_backright") or
+	event.get_action_strength("corner_move_forwardleft") or event.get_action_strength("corner_move_forwardright") or
+	event.get_action_strength("move_backward") or event.get_action_strength("move_forward") or
+	event.get_action_strength("move_left") or event.get_action_strength("move_right")):
+		if event.is_pressed() and not movement_action_held:
+			handle_movement()
+			$MoveActionHeldTimer.start()
+#			movement_action_held = true
+	if (event.is_action_released("move_rise") or event.is_action_released("move_fall") or
+	event.is_action_released("corner_move_backleft") or event.is_action_released("corner_move_backright") or
+	event.is_action_released("corner_move_forwardleft") or event.is_action_released("corner_move_forwardright") or
+	event.is_action_released("move_backward") or event.is_action_released("move_forward") or
+	event.is_action_released("move_left") or event.is_action_released("move_right")):
+		if event.is_released():
+			movement_action_held = false
+			$MoveActionHeldTimer.stop()
+	
+func handle_movement():
+	var vec = Vector2.ZERO
 	if not blocked:
-		vec = Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
+#			vec = Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
+		vec = _get_dir().floor()
 	if vec:
 #		celVec3 += Vector3(vec.x,vec.y,0)
 		pos_changed(celVec3 + Vector3(vec.x,vec.y,0))
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
 
-#func _unhandled_input(event):
-#	var vec = event.get_vector()
+
+func _get_dir() -> Vector3:
+	var dir = Vector3.ZERO
+	var vec2 = Vector2.ZERO
+	vec2 = (Input.get_action_strength("corner_move_backleft") * Vector2(-1,1) +
+	Input.get_action_strength("corner_move_backright") * Vector2(1,1) +
+	Input.get_action_strength("corner_move_forwardleft") * Vector2(-1,-1) +
+	Input.get_action_strength("corner_move_forwardright") * Vector2(1,-1)
+	)
+	if not vec2:
+		vec2 = Input.get_vector("move_left","move_right","move_forward","move_backward")
+	var rise = Input.get_action_strength("move_rise") - Input.get_action_strength("move_fall")
+	dir = Vector3(vec2.x,vec2.y,rise)
+	return dir
+
+
+func _on_MoveActionHeldTimer_timeout():
+	print("TIME!")
+	movement_action_held = true
+	pass # Replace with function body.
