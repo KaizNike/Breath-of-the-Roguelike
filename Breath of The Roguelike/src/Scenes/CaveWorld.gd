@@ -94,12 +94,15 @@ func _ready():
 		var new_actor = actor.instance()
 		new_actor.tileData = Vector2(0,2)
 		new_actor.celVec3 = Vector3(s.x,s.y,z_level)
+		new_actor.actorDict.ai = "random"
+		new_actor.tileID = 1
 		$Actors.add_child(new_actor)
 		$"32RoguesActorMap".set_cellv(s,1,false,false,false,Vector2(0,2))
 		pass
 	print($Actors.get_children())
 	print("Now play!")
 	EntityGlobals.game_start = true
+	$CanvasLayer3/PlayerUI/VBoxContainer/PanelContainer/VSplitContainer/TextEdit.text += "Day 1 of my new adventure!\nMay I not be eaten by a Grue."
 	pass # Replace with function body.
 
 

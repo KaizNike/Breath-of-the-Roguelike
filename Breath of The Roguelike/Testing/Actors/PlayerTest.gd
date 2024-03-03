@@ -1,6 +1,6 @@
 extends Actor
 
-var blocked = false
+
 var movement_action_held = false
 # Declare member variables here. Examples:
 # var a = 2
@@ -9,6 +9,7 @@ var movement_action_held = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	EntityGlobals.playerId = id
 	pass # Replace with function body.
 
 func _physics_process(delta):
@@ -43,6 +44,7 @@ func handle_movement():
 	if vec:
 #		celVec3 += Vector3(vec.x,vec.y,0)
 		pos_changed(celVec3 + Vector3(vec.x,vec.y,0))
+		Globals.emit_signal("tick_request")
 
 
 func _get_dir() -> Vector3:
@@ -64,3 +66,5 @@ func _on_MoveActionHeldTimer_timeout():
 	print("You begin walking.")
 	movement_action_held = true
 	pass # Replace with function body.
+	
+	

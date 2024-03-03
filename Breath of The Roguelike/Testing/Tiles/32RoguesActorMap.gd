@@ -24,9 +24,9 @@ func check_collision(celVec3, destVec3, id):
 		EntityGlobals.emit_signal("can_move",false,destVec3,world_pos,id)
 	
 	
-func move_entity(celVec3, destVec3, tileID, id):
+func move_entity(celVec3, destVec3, tileData, tileID, id):
 	set_cell(celVec3.x,celVec3.y,-1)
-	set_cell(destVec3.x,destVec3.y,0,false,false,false,tileID)
+	set_cell(destVec3.x,destVec3.y,tileID,false,false,false,tileData)
 
 
 func return_world_pos(loc, id):

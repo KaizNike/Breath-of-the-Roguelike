@@ -1,0 +1,46 @@
+[gd_scene format=2]
+
+[node name="DiagOptionUI" type="Control"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -156.5
+margin_top = -34.0
+margin_right = 156.5
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer"]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 306.0
+margin_bottom = 27.0
+
+[node name="Label" type="Label" parent="PanelContainer/HBoxContainer"]
+margin_top = 3.0
+margin_right = 241.0
+margin_bottom = 17.0
+text = "This being would like to talk, will you?"
+
+[node name="Button" type="Button" parent="PanelContainer/HBoxContainer"]
+margin_left = 245.0
+margin_right = 264.0
+margin_bottom = 20.0
+text = "Y"
+
+[node name="Label2" type="Label" parent="PanelContainer/HBoxContainer"]
+margin_left = 268.0
+margin_top = 3.0
+margin_right = 273.0
+margin_bottom = 17.0
+text = "/"
+
+[node name="Button2" type="Button" parent="PanelContainer/HBoxContainer"]
+margin_left = 277.0
+margin_right = 299.0
+margin_bottom = 20.0
+text = "N"

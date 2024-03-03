@@ -24,7 +24,7 @@ polygon = PoolVector2Array( 16, 0, 16, 0, 32, 0, 32, 32, 0, 32, 0, 16, 16, 16 )
 polygon = PoolVector2Array( 32, 32, 16, 32, 16, 16, 32, 16 )
 
 [sub_resource type="OccluderPolygon2D" id=15]
-polygon = PoolVector2Array( 32, 32, 0, 32, 0, 0, 32, 0 )
+polygon = PoolVector2Array( 20.222, 23.8567, 10.1751, 23.8567, 10.1751, 7.11177, 20.222, 7.11177 )
 
 [sub_resource type="OccluderPolygon2D" id=9]
 polygon = PoolVector2Array( 32, 32, 16, 32, 16, 0, 32, 0 )
