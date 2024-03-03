@@ -3,6 +3,7 @@ extends Node2D
 
 export var celVec3 := Vector3.ZERO setget pos_changed
 var tileData = Vector2(1000,1000)
+var moveAllows = 0
 export (int) var id
 export var actorDict := {
 	"name": "???"
@@ -14,7 +15,9 @@ export var actorDict := {
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	EntityGlobals.connect("can_move",self,"actor_interact")
 	EntityGlobals.connect("can_move",self,"move")
+	EntityGlobals.connect("second_can_move",self,"move")
 	EntityGlobals.connect("return_world_pos",self,"update_pos_from_map")
 	id = EntityGlobals.set_entity_id()
 	pos_changed(celVec3)
@@ -32,18 +35,35 @@ func pos_changed(locVec3):
 		return
 	EntityGlobals.emit_signal("entity_move_check",celVec3 ,locVec3, id)
 	
-	
+func actor_interact(canMove,destVec3,worldPos,idCheck):
+	if id != idCheck:
+		return
+	if canMove:
+		pass
+#		EntityGlobals.emit_signal("entity_moved",celVec3 ,destVec3, tileData, id)
+#		var oldVec3 = celVec3
+#		celVec3 = destVec3
+##		position = (Vector2(celVec3.x,celVec3.y) * Globals.cellSize) + Vector2(8,8)
+#		position = worldPos
+#		print("@: Origin:",oldVec3," Dest:",destVec3," Pos:", position)
+	else:
+		print("Let's talk!")
 
 func move(canMove, destVec3, worldPos, idCheck):
 	if id != idCheck:
 		return
 	if canMove:
+		moveAllows += 1
+	else:
+		moveAllows = 0
+	if canMove and moveAllows == 2:
 		EntityGlobals.emit_signal("entity_moved",celVec3 ,destVec3, tileData, id)
 		var oldVec3 = celVec3
 		celVec3 = destVec3
 #		position = (Vector2(celVec3.x,celVec3.y) * Globals.cellSize) + Vector2(8,8)
 		position = worldPos
 		print("@: Origin:",oldVec3," Dest:",destVec3," Pos:", position)
+		moveAllows = 0
 	else:
 		print(actorDict.name, "Can't move!")
 	pass

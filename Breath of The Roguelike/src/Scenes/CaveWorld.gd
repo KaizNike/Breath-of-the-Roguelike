@@ -3,10 +3,10 @@ extends Node
 export (PackedScene) var player
 export (PackedScene) var actor
 
-var dimension = Vector2(1000,1000)
+var dimension = Vector2(100,100)
 var drunk_start = Vector2(dimension.x/2,dimension.y/2)
-var drunk_steps = 120000
-var drunk_minor_steps = 10000
+var drunk_steps = 1200
+var drunk_minor_steps = 1000
 var minor_caves
 var minor_cave_size
 var seeds = []
@@ -55,7 +55,8 @@ func _ready():
 			(randi() % 3) - 1 
 		)
 		start += dir
-	print("Starting little caves.")
+	if minor_caves > 0:
+		print("Starting little caves.")
 	for cave in minor_caves:
 		minor_cave_size = randi() % drunk_minor_steps
 		print(minor_cave_size)
