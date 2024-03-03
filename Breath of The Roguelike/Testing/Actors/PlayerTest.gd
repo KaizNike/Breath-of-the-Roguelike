@@ -15,10 +15,11 @@ func _physics_process(delta):
 	if not blocked:
 		vec = Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
 	if vec:
-		celVec3 += Vector3(vec.x,vec.y,0)
+#		celVec3 += Vector3(vec.x,vec.y,0)
+		pos_changed(celVec3 + Vector3(vec.x,vec.y,0))
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):
 #	pass
 
-func _unhandled_input(event):
-	var vec = event.get_vector()
+#func _unhandled_input(event):
+#	var vec = event.get_vector()

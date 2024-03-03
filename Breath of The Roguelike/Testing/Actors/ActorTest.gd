@@ -2,6 +2,7 @@ class_name Actor
 extends Node
 
 export var celVec3 := Vector3.ZERO setget pos_changed
+var tileData = Vector2(1000,1000)
 export var actorDict := {
 	"name": "???"
 }
@@ -20,7 +21,10 @@ func _ready():
 #	pass
 
 func pos_changed(locVec3):
-	EntityGlobals.emit_signal("entity_moved", locVec3)
+	if not EntityGlobals.game_start:
+		celVec3 = locVec3
+		return
+	EntityGlobals.emit_signal("entity_moved",celVec3 ,locVec3, tileData)
 	var canMove = yield(EntityGlobals, "can_move")
 	if canMove:
 		celVec3 = locVec3
