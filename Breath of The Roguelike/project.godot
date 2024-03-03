@@ -9,7 +9,7 @@
 config_version=4
 
 _global_script_classes=[ {
-"base": "Node",
+"base": "Node2D",
 "class": "Actor",
 "language": "GDScript",
 "path": "res://Testing/Actors/ActorTest.gd"
@@ -26,6 +26,7 @@ config/icon="res://BreathIcon.png"
 [autoload]
 
 EntityGlobals="*res://Testing/Globals/EntityGlobals.tscn"
+Globals="*res://Testing/Globals/Globals.tscn"
 
 [gui]
 

@@ -61,6 +61,6 @@ func _get_dir() -> Vector3:
 
 
 func _on_MoveActionHeldTimer_timeout():
-	print("TIME!")
+	print("You begin walking.")
 	movement_action_held = true
 	pass # Replace with function body.

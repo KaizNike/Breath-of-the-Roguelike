@@ -2,7 +2,10 @@ extends Node
 
 signal entity_moved(posVec3, destVec3, tileData, id)
 signal entity_move_check(posVec3, destVec3, id)
-signal can_move(Bool, destVec3, id)
+signal can_move(Bool, destVec3,worldPos, id)
+
+signal get_world_pos(loc, id)
+signal return_world_pos(pos, id)
 # Declare member variables here. Examples:
 # var a = 2
 # var b = "text"
